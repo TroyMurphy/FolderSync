@@ -26,7 +26,7 @@ class SyncFile():
 			return self._version
 
 		parts = self.rawPath.stem.upper().rsplit("REV")
-		if len(parts):
+		if len(parts) == 1:
 			return None
 		
 		self._version = str(re.search(r"\w", parts[1])[0])
