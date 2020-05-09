@@ -1,5 +1,5 @@
-SOURCE = r'..\example\one\source'
-TARGET = r'..\example\one\target'
+SOURCE = r'.\example\one\source'
+TARGET = r'.\example\one\target'
 
 directoryList = [
 	"A1-10033",

@@ -6,7 +6,7 @@ import settings
 regexString = re.compile(r'(?:{})'.format('|'.join(map(re.escape, settings.directoryList))))
 
 def getPrefixFromCompanyFolder(company_folder):
-	prefix = re.search(r"\A[A-Z][1-9]-\d*",company_folder)
+	prefix = re.search(r"^[A-Z][1-9]-\d*",company_folder)
 	return prefix[0] if prefix else None 
 
 def shouldSyncDirectory(file):

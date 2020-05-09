@@ -29,11 +29,11 @@ class SyncManager():
         try:
             target_file.rawPath.parent.mkdir(parents=True, exist_ok=True)
             print("Copying {0} to {1}".format(src, dst))
-            shutil.copyfile(src, dst)
-            # Thread(target=shutil.copyfile, args=[
-            # 	str(syncFile.rawPath.absolute()),
-            # 	str(targetFile.rawPath.absolute())
-            # ]).start()
+            #shutil.copyfile(src, dst)
+            Thread(target=shutil.copyfile, args=[
+            	src,
+				dst
+            ]).start()
             return 0
         except shutil.SameFileError:
             print("Source and destination represents the same file.")

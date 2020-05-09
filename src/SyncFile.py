@@ -52,7 +52,7 @@ class SyncFile():
 			return True
 
 		if that_version.isnumeric():
-			return True
+			return False
 		return this_version > that_version
 
 	def __str__(self):
