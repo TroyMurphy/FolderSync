@@ -43,6 +43,9 @@ class SyncFile():
 		this_version = self.version
 		that_version = otherFile.version
 
+		if this_version is None:
+			return False
+
 		if that_version is None:
 			return True
 

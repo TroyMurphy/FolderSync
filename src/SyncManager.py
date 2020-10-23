@@ -46,7 +46,7 @@ class SyncManager():
         return 1
 
     def archiveOldVersions(self, syncFile):
-        matchesToArchive = syncFile.rawPath.parent.glob(syncFile.identifier)
+        matchesToArchive = syncFile.rawPath.parent.glob(syncFile.identifier+"*.pdf")
         for matchToArchive in matchesToArchive:
             newParts = list(matchToArchive.parts)
             newParts.insert(-1, 'Archive')

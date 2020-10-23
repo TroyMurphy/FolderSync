@@ -38,6 +38,7 @@ def main():
 				for f in conflictingFiles[1:]:
 					maxFile = f if f > maxFile else maxFile
 				syncManager.copyFile(maxFile)
+	return True
 
 if __name__ == "__main__":
 	main()
