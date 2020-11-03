@@ -1,6 +1,12 @@
 SOURCE = r'.\example\one\source'
 TARGET = r'.\example\one\target'
 
+ARCHIVE_DIRECTORY_NAME = "Archive"
+
+
+NEW_FILES_DIRECTORY = None
+NEW_FILES_DIRECTORY = "NEW"
+
 directoryList = [
 	"A1-10033",
 	"A1-10034",

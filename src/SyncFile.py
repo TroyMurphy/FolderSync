@@ -34,9 +34,7 @@ class SyncFile():
 
 	def createFileWithNewRoot(self, source, target):
 		return SyncFile(
-			str(self.rawPath).replace(
-				str(source), str(target)
-			)
+			str(self.rawPath).replace(str(source), str(target))
 		)
 
 	def __gt__(self, otherFile):

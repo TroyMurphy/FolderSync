@@ -1,6 +1,7 @@
 from SyncManager import SyncManager 
 from SyncFile import SyncFile
 import re
+from datetime import datetime
 import settings
 
 regexString = re.compile(r'(?:{})'.format('|'.join(map(re.escape, settings.directoryList))))
@@ -15,6 +16,9 @@ def shouldSyncDirectory(file):
 def main():
 	syncManager = SyncManager()
 	syncManager.logState()
+
+	copy_threads = []
+	syncFilesToCopy = []
 
 	for project_folder in syncManager.sourceRootDir.iterdir():
 		for company_folder in project_folder.iterdir():
@@ -37,7 +41,23 @@ def main():
 				maxFile = conflictingFiles[0]
 				for f in conflictingFiles[1:]:
 					maxFile = f if f > maxFile else maxFile
-				syncManager.copyFile(maxFile)
+				syncFilesToCopy.append(maxFile)
+				values = syncManager.copyFile(maxFile)
+				t = values.get("threads")
+				destination = values.get("destination")
+
+				syncFilesToCopy.append(destination)
+				if t is not None:
+					copy_threads.append(t)
+
+	for t in copy_threads:
+		t.join()
+
+	with open("log_{0}.txt".format(datetime.now().strftime("%Y-%m-%d %H %M %S")), 'w') as log:
+		for f in syncFilesToCopy:
+			log.write("{0}\n".format(str(f)))
+
+	print("Done.")
 	return True
 
 if __name__ == "__main__":
