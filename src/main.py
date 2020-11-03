@@ -43,12 +43,16 @@ def main():
 					maxFile = f if f > maxFile else maxFile
 				syncFilesToCopy.append(maxFile)
 				values = syncManager.copyFile(maxFile)
-				t = values.get("threads")
-				destination = values.get("destination")
+				if values is not None:
+					t = values.get("thread")
+					destination = values.get("destination")
+					newCopy = values.get("newCopy", None)
+					if (newCopy is not None):
+						copy_threads.append(newCopy)
 
-				syncFilesToCopy.append(destination)
-				if t is not None:
-					copy_threads.append(t)
+					syncFilesToCopy.append(destination)
+					if t is not None:
+						copy_threads.append(t)
 
 	for t in copy_threads:
 		t.join()

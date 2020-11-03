@@ -3,6 +3,7 @@ import os
 import settings
 from threading import Thread
 import shutil
+from datetime import datetime
 
 class SyncManager():
 	def __init__(self, sourceDir=None, targetDir=None):
@@ -35,7 +36,11 @@ class SyncManager():
 				dst
 			]).start()
 
-			return {"thread": t, "destination": target_file.rawPath}
+			newCopy = None
+			if settings.NEW_FILES_DIRECTORY is not None:
+				newCopy = self.createSecondCopyInNewDirectory(src, target_file)
+
+			return {"thread": t, "destination": target_file.rawPath, "optional": newCopy}
 		except shutil.SameFileError:
 			print("Source and destination represents the same file.")
 		except IsADirectoryError:
@@ -49,9 +54,23 @@ class SyncManager():
 	def archiveOldVersions(self, syncFile):
 		matchesToArchive = syncFile.rawPath.parent.glob(syncFile.identifier+"*.pdf")
 		for matchToArchive in matchesToArchive:
+			if matchToArchive == syncFile.rawPath.name:
+				continue
 			newParts = list(matchToArchive.parts)
 			newParts.insert(-1, settings.ARCHIVE_DIRECTORY_NAME)
 
 			newPath = pathlib.Path(*newParts)
 			newPath.parent.mkdir(parents=False, exist_ok=True)
 			matchToArchive.rename(newPath)
+
+	def createSecondCopyInNewDirectory(self, src, dest):
+		newParts = list(dest.rawPath.parts)
+		newParts.insert(-1, settings.NEW_FILES_DIRECTORY)
+		newDest = pathlib.Path(*newParts)
+		newDest.parent.mkdir(parents=False, exist_ok=True)
+
+		t = Thread(target=shutil.copyfile, args=[
+			src,
+			str(newDest)
+		]).start()
+		return t
