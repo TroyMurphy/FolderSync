@@ -3,3 +3,6 @@ target/
 **/__pycache__/
 *.pyc
 .vscode/
+.venv/
+.idea/
+log*.txt

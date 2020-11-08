@@ -1,6 +1,18 @@
 SOURCE = r'.\example\one\source'
 TARGET = r'.\example\one\target'
 
+ARCHIVE_DIRECTORY_NAME = "Archive"
+
+"""
+The NEW_FILES_DIRECTORY, when set, will create a second copy of the files in a folder with that name. (ie. NEW)
+This can be very useful when you need to watermark files. They will have the same name, so dragging them one folder up and replacing, should
+easily update these files without conflict.
+
+Make sure to clear out the NEW folders before running as they are not cleaned up or archived.
+"""
+#NEW_FILES_DIRECTORY = None
+NEW_FILES_DIRECTORY = "NEW"
+
 directoryList = [
 	"A1-10033",
 	"A1-10034",
