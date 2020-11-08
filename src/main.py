@@ -16,8 +16,8 @@ def main():
 	syncManager = SyncManager()
 	syncManager.logState()
 
-	for project_folder in syncManager.sourceRootDir.iterdir():
-		for company_folder in project_folder.iterdir():
+	for project_folder in [x for x in syncManager.sourceRootDir.iterdir() if x.is_dir()]:
+		for company_folder in [x for x in project_folder.iterdir() if x.is_dir()]:
 			if not shouldSyncDirectory(company_folder.name):
 				continue
 			print("Syncing {0}".format(company_folder.name))
