@@ -4,6 +4,16 @@ TARGET = r'.\example\one\target'
 ARCHIVE_DIRECTORY_NAME = "Archive"
 
 """
+The application will copy files that match the syntax "{COMPANY FOLDER}{FILE_SUFFIX}"
+ex.
+A1-18001*.pdf
+
+To sync only files that include HCWI, modify FILE_SUFFIX to be 
+*HCWI*.pdf
+"""
+FILE_SUFFIX = "*.pdf"
+
+"""
 The NEW_FILES_DIRECTORY, when set, will create a second copy of the files in a folder with that name. (ie. NEW)
 This can be very useful when you need to watermark files. They will have the same name, so dragging them one folder up and replacing, should
 easily update these files without conflict.

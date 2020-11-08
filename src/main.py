@@ -17,22 +17,16 @@ def main():
 	syncManager = SyncManager()
 	syncManager.logState()
 
-<<<<<<< HEAD
-	for project_folder in [x for x in syncManager.sourceRootDir.iterdir() if x.is_dir()]:
-		for company_folder in [x for x in project_folder.iterdir() if x.is_dir()]:
-=======
 	copy_threads = []
 	syncFilesToCopy = []
-
-	for project_folder in syncManager.sourceRootDir.iterdir():
-		for company_folder in project_folder.iterdir():
->>>>>>> 432adf2d71721f158eb4c7d07da83d7fb7aaf84a
+	for project_folder in [x for x in syncManager.sourceRootDir.iterdir() if x.is_dir()]:
+		for company_folder in [x for x in project_folder.iterdir() if x.is_dir()]:
 			if not shouldSyncDirectory(company_folder.name):
 				continue
 			print("Syncing {0}".format(company_folder.name))
 
 			filePrefix = getPrefixFromCompanyFolder(company_folder.name)
-			allFiles = [x for x in (company_folder.glob(filePrefix+"*.pdf"))]
+			allFiles = [x for x in (company_folder.glob(filePrefix+settings.FILE_SUFFIX))]
 
 			groupedFiles = {}
 			for ungroupedFile in allFiles:
