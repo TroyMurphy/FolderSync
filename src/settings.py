@@ -1,5 +1,4 @@
 SOURCE = r'.\example\one\source'
-TARGET = r'.\example\one\target'
 
 ARCHIVE_DIRECTORY_NAME = "Archive"
 
@@ -11,7 +10,7 @@ A1-18001*.pdf
 To sync only files that include HCWI, modify FILE_SUFFIX to be 
 *HCWI*.pdf
 """
-FILE_SUFFIX = "*.pdf"
+#FILE_SUFFIX = "*.pdf"
 
 """
 The NEW_FILES_DIRECTORY, when set, will create a second copy of the files in a folder with that name. (ie. NEW)
@@ -22,6 +21,11 @@ Make sure to clear out the NEW folders before running as they are not cleaned up
 """
 #NEW_FILES_DIRECTORY = None
 NEW_FILES_DIRECTORY = "NEW"
+
+testDirectoryList = [
+	"A1-18019",
+	"A1-19017"
+]
 
 directoryList = [
 	"A1-10033",

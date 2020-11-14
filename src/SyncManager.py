@@ -65,7 +65,7 @@ class SyncManager():
 
 	def createSecondCopyInNewDirectory(self, src, dest):
 		newParts = list(dest.rawPath.parts)
-		newParts.insert(-1, settings.NEW_FILES_DIRECTORY)
+		newParts.insert(-3, settings.NEW_FILES_DIRECTORY)
 		newDest = pathlib.Path(*newParts)
 		newDest.parent.mkdir(parents=False, exist_ok=True)
 
