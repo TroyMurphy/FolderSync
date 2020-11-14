@@ -2,11 +2,12 @@ from SyncManager import SyncManager
 from SyncFile import SyncFile
 import re
 from datetime import datetime
-
+from .settings import DO_LOGGING
 """
 ENSURE THIS IMPORT BELOW IS CORRECT
 """
-from .settings import testDirectoryList as directoryList, DO_LOGGING
+
+from .settings import testDirectoryList as directoryList
 # from .settings import directoryList as directoryList
 
 regexString = re.compile(r'(?:{})'.format('|'.join(map(re.escape, directoryList))))

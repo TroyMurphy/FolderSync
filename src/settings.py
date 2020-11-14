@@ -1,5 +1,5 @@
-#SOURCE = r'C:\156Vault\A1 - Projects'
-SOURCE = r'N:\A1 - Projects'
+SOURCE = r'C:\156Vault\A1 - Projects'
+#SOURCE = r'N:\A1 - Projects'
 
 ARCHIVE_DIRECTORY_NAME = "Archive"
 DO_LOGGING = False
