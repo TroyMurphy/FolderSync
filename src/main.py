@@ -3,9 +3,20 @@ from src.penticton.penticton_sync import penticton_sync
 from src.morowat.morowat_sync import morowat_sync
 
 def main():
-    alco_sync()
-    penticton_sync()
-    morowat_sync()
+    threads = alco_sync()
+    join_threads(threads)
+
+    threads = penticton_sync()
+    join_threads(threads)
+
+    threads = morowat_sync()
+    join_threads(threads)
+
+    print("Finished Sync. Hooray!")
+
+def join_threads(threads_list):
+    for t in threads_list:
+        t.join()
 
 if __name__=="__main__":
     main()

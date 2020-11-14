@@ -3,8 +3,8 @@ from SyncFile import SyncFile
 import re
 from datetime import datetime
 
-from .settings import testDirectoryList as directoryList
-#from .settings import directoryList as directoryList
+from .settings import testDirectoryList as directoryList, DO_LOGGING
+# from .settings import directoryList as directoryList
 
 regexString = re.compile(r'(?:{})'.format('|'.join(map(re.escape, directoryList))))
 
@@ -55,16 +55,10 @@ def folder_sync(source_dir, target_dir, file_regex_suffix):
 					if t is not None:
 						copy_threads.append(t)
 
-	for t in copy_threads:
-		t.join()
 
-	with open("log_{0}.txt".format(datetime.now().strftime("%Y-%m-%d %H %M %S")), 'w') as log:
-		for f in syncFilesToCopy:
-			log.write("{0}\n".format(str(f)))
+	if DO_LOGGING:
+		with open("log_{0}.txt".format(datetime.now().strftime("%Y-%m-%d %H %M %S")), 'w') as log:
+			for f in syncFilesToCopy:
+				log.write("{0}\n".format(str(f)))
 
-	print("Done.")
-	return True
-
-if __name__ == "__main__":
-	main()
- 
+	return copy_threads

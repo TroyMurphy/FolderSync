@@ -60,14 +60,14 @@ class SyncManager():
 			newParts.insert(-1, settings.ARCHIVE_DIRECTORY_NAME)
 
 			newPath = pathlib.Path(*newParts)
-			newPath.parent.mkdir(parents=False, exist_ok=True)
+			newPath.parent.mkdir(parents=True, exist_ok=True)
 			matchToArchive.rename(newPath)
 
 	def createSecondCopyInNewDirectory(self, src, dest):
 		newParts = list(dest.rawPath.parts)
-		newParts.insert(-3, settings.NEW_FILES_DIRECTORY)
+		newParts.insert(-4, settings.NEW_FILES_DIRECTORY)
 		newDest = pathlib.Path(*newParts)
-		newDest.parent.mkdir(parents=False, exist_ok=True)
+		newDest.parent.mkdir(parents=True, exist_ok=True)
 
 		t = Thread(target=shutil.copyfile, args=[
 			src,
