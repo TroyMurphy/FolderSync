@@ -6,13 +6,14 @@ import shutil
 from datetime import datetime
 
 class SyncManager():
-	def __init__(self, sourceDir=None, targetDir=None):
-		self.sourceRootDir = pathlib.Path((sourceDir or settings.SOURCE))
-		self.targetRootDir = pathlib.Path((targetDir or settings.TARGET))
+	def __init__(self, sourceDir, targetDir, createSecondCopy=False):
+		self.sourceRootDir = pathlib.Path(sourceDir)
+		self.targetRootDir = pathlib.Path(targetDir)
+		self.createSecondCopy = createSecondCopy
 
 	def logState(self):
-		print("Source: ", self.sourceRootDir )
-		print("Target: ", self.targetRootDir )
+		print("Source: ", self.sourceRootDir)
+		print("Target: ", self.targetRootDir)
 
 	def copyFile(self, sync_file):
 		target_file = sync_file.createFileWithNewRoot(
@@ -37,7 +38,7 @@ class SyncManager():
 			]).start()
 
 			newCopy = None
-			if settings.NEW_FILES_DIRECTORY is not None:
+			if self.createSecondCopy == True:
 				newCopy = self.createSecondCopyInNewDirectory(src, target_file)
 
 			return {"thread": t, "destination": target_file.rawPath, "optional": newCopy}
@@ -65,7 +66,7 @@ class SyncManager():
 
 	def createSecondCopyInNewDirectory(self, src, dest):
 		newParts = list(dest.rawPath.parts)
-		newParts.insert(-4, settings.NEW_FILES_DIRECTORY)
+		newParts.insert(-4, "NEW")
 		newDest = pathlib.Path(*newParts)
 		newDest.parent.mkdir(parents=True, exist_ok=True)
 

@@ -15,8 +15,8 @@ def getPrefixFromCompanyFolder(company_folder):
 def shouldSyncDirectory(file):
 	return bool(regexString.search(file))
 
-def folder_sync(source_dir, target_dir, file_regex_suffix):
-	syncManager = SyncManager(source_dir, target_dir)
+def folder_sync(source_dir, target_dir, file_regex_suffix, createSecondCopy=False):
+	syncManager = SyncManager(source_dir, target_dir, createSecondCopy)
 	syncManager.logState()
 
 	copy_threads = []

@@ -6,7 +6,7 @@ def alco_sync():
     #watermark_documents()
 
 def sync_alco_folder():
-    return folder_sync(SOURCE_DIRECTORY, TARGET_DIRECTORY, SUFFIX)
+    return folder_sync(SOURCE_DIRECTORY, TARGET_DIRECTORY, SUFFIX, True)
 
 def watermark_documents():
     pass
