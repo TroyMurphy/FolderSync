@@ -3,6 +3,9 @@ from SyncFile import SyncFile
 import re
 from datetime import datetime
 
+"""
+ENSURE THIS IMPORT BELOW IS CORRECT
+"""
 from .settings import testDirectoryList as directoryList, DO_LOGGING
 # from .settings import directoryList as directoryList
 
